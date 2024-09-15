@@ -4,15 +4,15 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 // PostgreSQL connection configuration
 const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT || 5432,
+  user: process.env.DB_USER,        // PostgreSQL user
+  host: process.env.DB_HOST,        // PostgreSQL host (e.g., your-cloud-db-host)
+  database: process.env.DB_NAME,    // PostgreSQL database name
+  password: process.env.DB_PASSWORD, // PostgreSQL password
+  port: process.env.DB_PORT || 5432  // PostgreSQL port (default is 5432)
 });
 
 // Middleware
