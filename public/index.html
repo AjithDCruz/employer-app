@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Entry Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .form-container {
+            width: 50%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Employee Details</h2>
+        <form id="employeeForm">
+            <input type="text" name="employee_id" placeholder="Employee ID" required>
+            <input type="text" name="employee_name" placeholder="Employee Name" required>
+            <input type="text" name="acf2_id" placeholder="ACF2 ID" required>
+            <input type="email" name="td_mail" placeholder="TD Mail ID" required>
+            <input type="email" name="wipro_mail" placeholder="Wipro Mail ID" required>
+            <input type="number" name="week1" placeholder="Week 1" required>
+            <input type="number" name="week2" placeholder="Week 2" required>
+            <input type="number" name="week3" placeholder="Week 3" required>
+            <input type="number" name="week4" placeholder="Week 4" required>
+            <input type="number" name="week5" placeholder="Week 5" required>
+            <input type="number" name="total" placeholder="Total" required>
+            <input type="number" name="leave_count" placeholder="Leave Count" required>
+            <textarea name="leave_details" placeholder="Leave Details"></textarea>
+            <textarea name="comments" placeholder="Additional Comments"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById("employeeForm").onsubmit = async (e) => {
+            e.preventDefault();
+            let formData = new FormData(e.target);
+            let formDataObject = {};
+            formData.forEach((value, key) => formDataObject[key] = value);
+
+            await fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formDataObject)
+            }).then(response => response.text()).then(data => {
+                alert(data);
+                e.target.reset();
+            });
+        };
+    </script>
+</body>
+</html>
